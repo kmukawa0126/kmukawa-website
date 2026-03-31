@@ -1715,4 +1715,8 @@ img {
   .hero-slide:nth-child(4) {
     background-position: 35% center !important;
   }
+  .hero-slide:nth-child(7) {
+    background-size: contain !important;
+    background-position: center center !important;
+  }
 }

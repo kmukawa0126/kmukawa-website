@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -87,6 +90,26 @@
       <div class="section-title" style="margin-bottom:32px;">注目の<span>最新記事</span></div>
 
       <div class="activity-list">
+
+        {% for post in site.posts %}
+        <a href="{{ post.url }}" style="text-decoration:none; color:inherit;">
+          <div class="activity-item" style="cursor:pointer; transition:box-shadow 0.2s;">
+            <div class="activity-date">{{ post.date | date: "%Y.%m.%d" }}</div>
+            <div style="display:flex; gap:16px; align-items:flex-start;">
+              <div style="flex:1;">
+                {% if post.category %}<div class="activity-tag">{{ post.category }}</div>{% endif %}
+                <h4>{{ post.title }}</h4>
+                {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+              </div>
+              {% if post.thumbnail %}
+              <div class="article-thumbnail-wrap">
+                <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="article-thumbnail">
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </a>
+        {% endfor %}
 
         <!-- 最新記事①：このサイト内ブログ -->
         <a href="blog/20260329/20260329.html" style="text-decoration:none; color:inherit;">

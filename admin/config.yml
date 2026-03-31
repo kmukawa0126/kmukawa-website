@@ -2,7 +2,8 @@ backend:
   name: github
   repo: kmukawa0126/kmukawa-website
   branch: main
-  base_url: https://sveltia-cms-auth.pages.dev
+  base_url: https://frolicking-bublanina-a90bb7.netlify.app
+  auth_endpoint: api/auth
 
 media_folder: "images/blog"
 public_folder: "/images/blog"

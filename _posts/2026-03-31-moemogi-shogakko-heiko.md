@@ -1,4 +1,5 @@
 ---
+layout: post
 title: もえぎ台小学校の閉校記念式典
 date: 2026-03-31
 thumbnail: /images/blog/IMG_1340.jpeg

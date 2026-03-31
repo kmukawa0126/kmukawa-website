@@ -7,3 +7,10 @@ permalink: /blog/:year:month:day/
 exclude:
   - README.md
   - node_modules/
+
+defaults:
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"

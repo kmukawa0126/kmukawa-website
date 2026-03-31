@@ -75,7 +75,7 @@ document.querySelectorAll('.global-nav a, .drawer-menu a, .mobile-nav a').forEac
     clearInterval(timer); goTo(current + 1); startTimer();
   });
 
-  function startTimer() { timer = setInterval(() => goTo(current + 1), 2000); }
+  function startTimer() { timer = setInterval(() => goTo(current + 1), 5000); }
 
   // ホバー中は停止
   const hero = document.querySelector('.hero');

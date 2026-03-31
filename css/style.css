@@ -1716,7 +1716,7 @@ img {
     background-position: 35% center !important;
   }
   .hero-slide:nth-child(7) {
-    background-size: contain !important;
+    background-size: auto 75% !important;
     background-position: center center !important;
   }
 }

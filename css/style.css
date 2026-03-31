@@ -1710,6 +1710,6 @@ img {
 
 @media (max-width: 768px) {
   .hero-slide:nth-child(1) {
-    background-position: 25% center;
+    background-position: 10% center;
   }
 }

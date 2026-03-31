@@ -2,8 +2,6 @@ backend:
   name: github
   repo: kmukawa0126/kmukawa-website
   branch: main
-  auth_type: implicit
-  app_id: Ov23liYccQvFPO4FThWn
 
 media_folder: "images/blog"
 public_folder: "/images/blog"

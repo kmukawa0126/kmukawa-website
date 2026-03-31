@@ -6,4 +6,5 @@ permalink: /blog/:year:month:day/
 
 exclude:
   - README.md
+  - admin/config.yml
   - node_modules/

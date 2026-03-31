@@ -100,7 +100,7 @@ permalink: /blog.html
               <div style="flex:1;">
                 {% if post.category %}<div class="activity-tag">{{ post.category }}</div>{% endif %}
                 <h4>{{ post.title }}</h4>
-                {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+                <p>{{ post.description | default: post.excerpt | strip_html | truncate: 120 }}</p>
               </div>
               {% if post.thumbnail %}
               <div class="article-thumbnail-wrap">

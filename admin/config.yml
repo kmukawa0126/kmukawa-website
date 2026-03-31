@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: kmukawa0126/kmukawa-website
   branch: main
+  base_url: https://sveltia-cms-auth.pages.dev
 
 media_folder: "images/blog"
 public_folder: "/images/blog"

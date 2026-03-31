@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: kmukawa0126/kmukawa-website
+  name: git-gateway
   branch: main
-  base_url: https://frolicking-bublanina-a90bb7.netlify.app
 
 media_folder: "images/blog"
 public_folder: "/images/blog"

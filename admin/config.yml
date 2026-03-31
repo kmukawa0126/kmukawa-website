@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: kmukawa0126/kmukawa-website
+  branch: main
+  auth_type: implicit
+  app_id: Ov23liYccQvFPO4FThWn
+
+media_folder: "images/blog"
+public_folder: "/images/blog"
+
+locale: ja
+
+collections:
+  - name: "blog"
+    label: "ブログ記事"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}{{month}}{{day}}"
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "投稿日", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "サムネイル画像", name: "thumbnail", widget: "image", required: false }
+      - { label: "本文", name: "body", widget: "markdown" }

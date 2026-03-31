@@ -1,0 +1,10 @@
+title: むかわけい 公式ホームページ
+url: https://kmukawa.jp
+baseurl: ""
+markdown: kramdown
+permalink: /blog/:year:month:day/
+
+exclude:
+  - README.md
+  - admin/config.yml
+  - node_modules/

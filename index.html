@@ -15,6 +15,7 @@
   <meta name="description" content="相模原市議会議員（南区選出）むかわ けい（務川 慧）の公式ホームページ。子育て・教育・地域交通・安全保障など市民生活に密着した政策に取り組んでいます。">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
@@ -387,5 +388,16 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function(user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function() {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>

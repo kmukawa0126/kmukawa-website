@@ -19,5 +19,6 @@ collections:
     fields:
       - { label: "タイトル", name: "title", widget: "string" }
       - { label: "投稿日", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "一覧表示用の説明文（120文字以内）", name: "description", widget: "text", required: false }
       - { label: "サムネイル画像", name: "thumbnail", widget: "image", required: false }
       - { label: "本文", name: "body", widget: "markdown" }

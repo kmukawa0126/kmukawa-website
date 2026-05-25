@@ -1,0 +1,43 @@
+# むかわけい公式サイト robots.txt
+# 通常の検索エンジンは許可、bandwidth を圧迫しがちな AI クローラと
+# アーカイブ系 bot は拒否 (議員サイトとして検索インデックスは欲しいが
+# 学習データ収集はお断り、という方針)。
+
+User-agent: *
+Allow: /
+
+# AI 学習クローラ (Anthropic, OpenAI, Common Crawl, Bytedance, Meta) を拒否
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+Sitemap: https://kmukawa.jp/sitemap.xml

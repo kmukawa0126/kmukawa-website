@@ -1,0 +1,29 @@
+# Netlify _headers — bandwidth 節約のための長期キャッシュ指定
+#
+# 画像/PDF/CSS/JS など content-addressed でない静的アセットを
+# 1年キャッシュ。中身が変わったらファイル名 (or _site の hash) を
+# 変えれば新しいファイルとして再取得される。
+#
+# HTML はキャッシュせず常に最新を取りに行く (短い max-age + must-revalidate)。
+
+# 画像 (1年キャッシュ + immutable で再検証もスキップ)
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 市政報告 PDF (1ヶ月キャッシュ。差し替えの可能性があるので immutable は付けない)
+/report/*
+  Cache-Control: public, max-age=2592000
+
+# CSS / JS (1週間)
+/css/*
+  Cache-Control: public, max-age=604800
+
+/js/*
+  Cache-Control: public, max-age=604800
+
+# HTML はキャッシュしない (記事追加・修正が即反映されてほしい)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

@@ -2,8 +2,13 @@ backend:
   name: github
   repo: kmukawa0126/kmukawa-website
   branch: main
-  base_url: https://frolicking-bublanina-a90bb7.netlify.app
-  auth_endpoint: api/auth
+  # GitHub OAuth プロキシ = Cloudflare Worker (公式 sveltia-cms-auth)。
+  # Netlify Functions から移行 (2026-05-31)。Worker は /auth と /callback を処理。
+  # ↓ Worker デプロイ後の実 URL に必ず置き換える。
+  #   例: https://sveltia-cms-auth.<あなたのsubdomain>.workers.dev
+  #   手順書: docs/CMS_AUTH_CLOUDFLARE.md
+  base_url: https://sveltia-cms-auth.kmukawa0126.workers.dev
+  # auth_endpoint は既定値 (auth) を使用するため指定しない
 
 media_folder: "images/blog"
 public_folder: "/images/blog"

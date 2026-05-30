@@ -1,6 +1,35 @@
 # ARCHITECTURE.md — 技術スタック詳細
 
-## 全体アーキテクチャ
+> ⚠️ **2026-05-31 訂正**: 本ドキュメントは旧「Netlify ホスティング」前提で書かれていたが、
+> 実態は **本番 kmukawa.jp = GitHub Pages 配信**（`Server: GitHub.com`、apex A=185.199.108-111.153）。
+> CMS の GitHub OAuth プロキシのみ Netlify Functions に依存していたが、Netlify サスペンド（5/30）を機に
+> **Cloudflare Worker（公式 sveltia-cms-auth）** へ移行中。下記の「Netlify」記述は移行完了で順次廃止。
+> 移行手順: [CMS_AUTH_CLOUDFLARE.md](CMS_AUTH_CLOUDFLARE.md)
+
+## 全体アーキテクチャ（移行後）
+
+```
+┌─────────────────┐
+│   GitHub Repo   │ kmukawa0126/kmukawa-website
+│ （ソース管理）  │
+└────────┬────────┘
+         │ push trigger
+         ↓
+┌─────────────────┐         ┌─────────────────┐
+│  GitHub Pages   │         │  Sveltia CMS    │
+│ ・Jekyll build  │         │  (/admin/)      │
+│ ・静的配信(apex)│         │  ブログ編集GUI  │
+└────────┬────────┘         └────────┬────────┘
+         │ HTTPS                     │ GitHub OAuth
+         ↓                           ↓
+┌─────────────────┐         ┌──────────────────────┐
+│  訪問者ブラウザ │         │ Cloudflare Worker    │
+└─────────────────┘         │ (sveltia-cms-auth)   │
+                            │ /auth ・ /callback   │
+                            └──────────────────────┘
+```
+
+## 旧・全体アーキテクチャ（参考・Netlify 時代）
 
 ```
 ┌─────────────────┐
@@ -38,16 +67,13 @@
 - **依存**: `Gemfile`（`jekyll` gem）
 - **ビルド**: `bundle exec jekyll build` → `_site/` を出力
 
-### 3. ホスティング: Netlify
-- **設定**: `netlify.toml`
-  - build command: `bundle exec jekyll build`
-  - publish dir: `_site`
-  - functions dir: `netlify/functions`
-- **リダイレクト**:
-  - `/admin` → `/admin/index.html`
-  - `/api/auth` → `/.netlify/functions/auth`
-  - `/api/auth/callback` → `/.netlify/functions/auth-callback`
-- **Netlify URL（管理用）**: `frolicking-bublanina-a90bb7.netlify.app`
+### 3. ホスティング: GitHub Pages（現行）
+- **配信元**: GitHub Pages（apex `kmukawa.jp` → A 185.199.108-111.153、`Server: GitHub.com`）
+- **ビルド**: push to `main` → GitHub Pages が Jekyll を自動ビルド・配信
+- **CNAME**: リポジトリ直下の `CNAME`（`kmukawa.jp`）で apex を紐付け
+- **注意**: GitHub Pages は `_headers`（Cache-Control）と `netlify.toml` の redirects を **無視する**。
+  キャッシュ制御は GitHub Pages 既定（`max-age=600`）。帯域はソフト上限 100GB/月。
+- ~~**旧: Netlify**（`netlify.toml` / `frolicking-bublanina-a90bb7.netlify.app`）~~ → 5/30 サスペンド、廃止予定
 
 ### 4. CMS: Decap CMS（旧 Netlify CMS）
 - **エントリーポイント**: `/admin/index.html`
@@ -60,12 +86,14 @@
   - スラッグ: `{{year}}-{{month}}-{{day}}-{{slug}}`
 - **メディアフォルダ**: `images/blog/` （CMS がアップロードした画像の保存先）
 
-### 5. 認証: Netlify Functions による GitHub OAuth プロキシ
-- **理由**: Netlify が公式の GitHub OAuth サービスを終了したため自前実装
-- **ファイル**:
-  - `netlify/functions/auth.js` — `/api/auth` から GitHub OAuth 画面へリダイレクト
-  - `netlify/functions/auth-callback.js` — callback で token を受け取り CMS に渡す
-- **環境変数**: `GITHUB_CLIENT_ID`、`GITHUB_CLIENT_SECRET` を Netlify ダッシュボードで設定済み
+### 5. 認証: Cloudflare Worker による GitHub OAuth プロキシ（現行）
+- **理由**: GitHub Pages には Functions が無いため、OAuth トークン交換を外部 Worker に委譲
+- **実装**: 公式 [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth)（Cloudflare Workers・無料）
+  - `/auth` — GitHub OAuth 認可画面へリダイレクト（CSRF token を HttpOnly Cookie に発行）
+  - `/callback` — code を access_token に交換し、origin 限定で CMS に postMessage
+- **環境変数（Worker secret）**: `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` / `ALLOWED_DOMAINS=kmukawa.jp`
+- **CMS 側設定**: `admin/config.yml` の `backend.base_url` を Worker URL に指定
+- ~~**旧: Netlify Functions**（`netlify/functions/auth.js` / `auth-callback.js`）~~ → 廃止予定
 
 ## ファイル責務マップ
 

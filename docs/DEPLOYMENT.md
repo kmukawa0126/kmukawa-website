@@ -1,14 +1,17 @@
 # DEPLOYMENT.md — デプロイ・運用手順
 
+> ⚠️ **2026-05-31 訂正**: 本番ホスティングは **GitHub Pages**（Netlify ではない）。
+> CMS の GitHub OAuth は **Cloudflare Worker** へ移行中（[CMS_AUTH_CLOUDFLARE.md](CMS_AUTH_CLOUDFLARE.md)）。
+> 以下の「Netlify」前提の記述は移行完了で廃止。
+
 ## 通常のデプロイフロー（自動）
 
 1. ローカルで編集
 2. `git add . && git commit -m "..." && git push origin main`
-3. GitHub の Webhook が Netlify に通知
-4. Netlify が `bundle exec jekyll build` を実行
-5. ビルド完了後、`_site/` が CDN に配信される（通常 1〜2分）
+3. GitHub Pages が push を検知して `jekyll build` を自動実行
+4. ビルド完了後、`kmukawa.jp`（GitHub Pages）に配信される（通常 1〜2分）
 
-**ローカルでの Jekyll ビルドは通常不要**（Netlify で自動ビルドされる）。
+**ローカルでの Jekyll ビルドは通常不要**（GitHub Pages で自動ビルドされる）。
 プレビュー確認したい場合のみ後述の「ローカル開発」手順を実行。
 
 ---
@@ -50,14 +53,14 @@ bundle exec jekyll serve
 
 ---
 
-## Netlify ダッシュボード
+## ビルド状況の確認（GitHub Pages）
 
-- **URL**: https://app.netlify.com/
-- **サイト名**: `frolicking-bublanina-a90bb7`（実 URL）
-- **環境変数**（Site settings → Environment variables）:
-  - `GITHUB_CLIENT_ID` — Decap CMS の OAuth 用
-  - `GITHUB_CLIENT_SECRET` — 同上
-- **ビルドログ**: Deploys タブから確認可能
+- リポジトリ **Settings → Pages** で公開状態・カスタムドメイン（`kmukawa.jp`）・HTTPS を確認
+- ビルド/デプロイのログは **Actions タブ**（"pages build and deployment" ワークフロー）で確認
+- ビルド失敗時は Actions のログでエラー箇所を特定
+
+### ~~旧: Netlify ダッシュボード~~（廃止予定）
+- `frolicking-bublanina-a90bb7` は 5/30 サスペンド。CF Worker 移行後に停止/削除（[CMS_AUTH_CLOUDFLARE.md](CMS_AUTH_CLOUDFLARE.md) ステップ5）
 
 ---
 
@@ -89,18 +92,16 @@ bundle exec jekyll serve
 
 ---
 
-## Decap CMS の OAuth 設定
+## CMS の OAuth 設定（Cloudflare Worker 版）
 
-新しい PC でも OAuth 設定の変更は不要（GitHub OAuth App は既に設定済み）。
+詳細な移行・運用手順は **[CMS_AUTH_CLOUDFLARE.md](CMS_AUTH_CLOUDFLARE.md)** に集約。要点のみ:
 
-### GitHub OAuth App（変更が必要な場合のみ）
-
-- **GitHub Settings → Developer settings → OAuth Apps**
-- **Homepage URL**: `https://frolicking-bublanina-a90bb7.netlify.app`
-- **Authorization callback URL**: `https://frolicking-bublanina-a90bb7.netlify.app/.netlify/functions/auth-callback`
-- **Client ID / Client Secret**: Netlify の環境変数に設定済み
-
-カスタムドメイン (`kmukawa.jp`) を設定後は、上記 URL を新ドメインに合わせて更新する必要あり。
+- OAuth プロキシ = Cloudflare Worker（公式 sveltia-cms-auth）。GitHub Pages に Functions は無い。
+- **GitHub OAuth App**
+  - Homepage URL: `https://kmukawa.jp`
+  - Authorization callback URL: `https://<Worker URL>/callback`
+- **Worker env**: `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` / `ALLOWED_DOMAINS=kmukawa.jp`
+- **CMS 設定**: `admin/config.yml` の `backend.base_url` = `https://<Worker URL>`
 
 ---
 
@@ -108,7 +109,7 @@ bundle exec jekyll serve
 
 ### ビルド失敗
 
-- Netlify Deploys タブのログを確認
+- GitHub の **Actions タブ**（"pages build and deployment"）のログを確認
 - よくある原因:
   - `_posts/` のファイル名が `YYYY-MM-DD-slug.md` 形式でない
   - Markdown 内の YAML front matter が不正
@@ -116,9 +117,10 @@ bundle exec jekyll serve
 
 ### CMS にログインできない
 
-- Netlify の環境変数（`GITHUB_CLIENT_ID`/`GITHUB_CLIENT_SECRET`）が設定されているか確認
-- GitHub OAuth App の callback URL が現在の Netlify URL と一致しているか確認
-- ブラウザの開発者ツールでネットワークタブを開き、`/api/auth` のレスポンスを確認
+- `admin/config.yml` の `base_url` が実 Worker URL になっているか（プレースホルダのままでないか・末尾 `/` 無し）
+- Cloudflare Worker の env（`GITHUB_CLIENT_ID`/`GITHUB_CLIENT_SECRET`/`ALLOWED_DOMAINS`）が設定されているか
+- GitHub OAuth App の callback URL が `https://<Worker URL>/callback` と完全一致しているか
+- 詳細な切り分けは [CMS_AUTH_CLOUDFLARE.md](CMS_AUTH_CLOUDFLARE.md) のトラブルシューティング表を参照
 
 ### ローカルプレビューでスタイルが崩れる
 
@@ -129,7 +131,7 @@ bundle exec jekyll serve
 
 - `_posts/` のファイル名と front matter の `date` が一致しているか確認
 - ファイル名に日本語が含まれている場合は半角英数のスラッグに変更
-- Netlify のビルドログでエラーが出ていないか確認
+- GitHub の Actions タブでビルドエラーが出ていないか確認
 
 ---
 
@@ -139,4 +141,4 @@ bundle exec jekyll serve
 - **画像**: `images/` 配下も Git 管理されている
 - **PDF**: `report/` 配下も Git 管理（重いファイルは要 Git LFS 検討）
 - **CMS で作成した記事**: GitHub に commit されるため自動バックアップ
-- **環境変数**: Netlify ダッシュボードでのみ管理。設定値は別途記録しておくこと
+- **環境変数（OAuth）**: Cloudflare Worker の Secret として管理。`GITHUB_CLIENT_ID`/`GITHUB_CLIENT_SECRET` の値は別途記録しておくこと

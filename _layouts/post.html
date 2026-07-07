@@ -11,10 +11,47 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }}｜むかわ けい</title>
-  <meta name="description" content="{{ page.description | default: page.title }}">
+  <title>{{ page.title }}｜むかわ けい（相模原市議会議員）</title>
+  {%- capture og_desc -%}{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 120 | escape }}{%- endcapture -%}
+  {%- if page.thumbnail -%}{%- assign og_image = page.thumbnail | absolute_url -%}{%- else -%}{%- assign og_image = '/images/ogp_default.jpg' | absolute_url -%}{%- endif %}
+  <meta name="description" content="{{ og_desc }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="むかわけい（務川慧）公式サイト">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ og_desc }}">
+  <meta property="og:image" content="{{ og_image }}">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.title | escape }}">
+  <meta name="twitter:description" content="{{ og_desc }}">
+  <meta name="twitter:image" content="{{ og_image }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ page.title | jsonify }},
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "image": {{ og_image | jsonify }},
+    "author": {
+      "@type": "Person",
+      "name": "務川慧",
+      "url": "https://kmukawa.jp/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "務川慧",
+      "url": "https://kmukawa.jp/"
+    },
+    "mainEntityOfPage": {{ page.url | absolute_url | jsonify }}
+  }
+  </script>
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous">
   <style>
     .blog-article {
       max-width: 800px;
@@ -207,7 +244,7 @@
       <a href="/blog.html">ブログ</a>
       <a href="/contact.html">お問い合わせ</a>
     </nav>
-    <p class="footer-copy">&copy; 2024 むかわ けい All Rights Reserved.</p>
+    <p class="footer-copy">&copy; 2026 むかわ けい All Rights Reserved.</p>
   </div>
 </footer>
 

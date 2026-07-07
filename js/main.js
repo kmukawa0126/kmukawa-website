@@ -50,6 +50,15 @@ document.querySelectorAll('.global-nav a, .drawer-menu a, .mobile-nav a').forEac
   let current = 0;
   let timer;
 
+  // 遅延読み込み: 2枚目以降の背景画像は初期表示後に読み込む
+  function hydrate(slide) {
+    if (slide.dataset.bg) {
+      slide.style.backgroundImage = "url('" + slide.dataset.bg + "')";
+      delete slide.dataset.bg;
+    }
+  }
+  window.addEventListener('load', () => slides.forEach(hydrate));
+
   // ドット生成
   slides.forEach((slide, i) => {
     const dot = document.createElement('button');
@@ -63,6 +72,7 @@ document.querySelectorAll('.global-nav a, .drawer-menu a, .mobile-nav a').forEac
     slides[current].classList.remove('active');
     dotsContainer.children[current].classList.remove('active');
     current = (index + slides.length) % slides.length;
+    hydrate(slides[current]);
     slides[current].classList.add('active');
     dotsContainer.children[current].classList.add('active');
     if (captionEl) captionEl.textContent = slides[current].dataset.label || '';

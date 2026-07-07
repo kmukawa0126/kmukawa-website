@@ -4,9 +4,16 @@ baseurl: ""
 markdown: kramdown
 permalink: /blog/:year:month:day/
 
+plugins:
+  - jekyll-sitemap
+
 exclude:
   - README.md
   - node_modules/
+  - CLAUDE.md
+  - docs/
+  - netlify/
+  - netlify.toml
 
 defaults:
   - scope:
@@ -14,3 +21,20 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+  # sitemap から画像・CSS・JS・管理画面を除外（jekyll-sitemap 用）
+  - scope:
+      path: "images"
+    values:
+      sitemap: false
+  - scope:
+      path: "css"
+    values:
+      sitemap: false
+  - scope:
+      path: "js"
+    values:
+      sitemap: false
+  - scope:
+      path: "admin"
+    values:
+      sitemap: false

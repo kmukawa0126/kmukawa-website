@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,11 +14,44 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preload" as="image" href="images/street_speech.jpg">
   <title>むかわ けい（務川 慧）｜相模原市議会議員</title>
   <meta name="description" content="相模原市議会議員（南区選出）むかわ けい（務川 慧）の公式ホームページ。子育て・教育・地域交通・安全保障など市民生活に密着した政策に取り組んでいます。">
+  <link rel="canonical" href="https://kmukawa.jp/">
+  <meta property="og:site_name" content="むかわけい（務川慧）公式サイト">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kmukawa.jp/">
+  <meta property="og:title" content="むかわ けい（務川 慧）｜相模原市議会議員">
+  <meta property="og:description" content="相模原市議会議員（南区選出）むかわ けい（務川 慧）の公式ホームページ。子育て・教育・地域交通・安全保障など市民生活に密着した政策に取り組んでいます。">
+  <meta property="og:image" content="https://kmukawa.jp/images/ogp_default.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="むかわ けい（務川 慧）｜相模原市議会議員">
+  <meta name="twitter:description" content="相模原市議会議員（南区選出）むかわ けい（務川 慧）の公式ホームページ。子育て・教育・地域交通・安全保障など市民生活に密着した政策に取り組んでいます。">
+  <meta name="twitter:image" content="https://kmukawa.jp/images/ogp_default.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "務川慧",
+    "alternateName": ["むかわけい", "むかわ けい", "Kei Mukawa"],
+    "jobTitle": "相模原市議会議員（南区選出）",
+    "url": "https://kmukawa.jp/",
+    "image": "https://kmukawa.jp/images/profile_main.jpg",
+    "sameAs": [
+      "https://twitter.com/mukawa0126",
+      "https://www.facebook.com/kei.mukawa",
+      "https://www.instagram.com/kmkw0126/"
+    ],
+    "affiliation": { "@type": "Organization", "name": "相模原市議会" },
+    "memberOf": { "@type": "Organization", "name": "自由民主党" }
+  }
+  </script>
 </head>
 <body>
 
@@ -81,21 +117,21 @@
   <!-- ヒーロー -->
   <section class="hero">
 
-    <!-- 背景スライダー -->
+    <!-- 背景スライダー (2枚目以降はJSで遅延読み込み) -->
     <div class="hero-slider" aria-hidden="true">
       <div class="hero-slide active" style="background-image:url('images/street_speech.jpg')" data-label="街頭演説"></div>
-      <div class="hero-slide" style="background-image:url('images/IMG_1358.PNG')" data-label="議会登壇"></div>
-      <div class="hero-slide" style="background-image:url('images/report_crowd.jpg')" data-label="市政報告会"></div>
-      <div class="hero-slide" style="background-image:url('images/report_speech.jpg')" data-label="市政報告会・講演"></div>
-      <div class="hero-slide" style="background-image:url('images/school_visit.jpg')" data-label="学校訪問・対話"></div>
-      <div class="hero-slide" style="background-image:url('images/kite_main.jpg')" data-label="地域文化の継承"></div>
-      <div class="hero-slide" style="background-image:url('images/factory_visit.jpg')" data-label="産業・企業視察"></div>
-      <div class="hero-slide" style="background-image:url('images/fire_watch.jpg')" data-label="防災・安全活動"></div>
-      <div class="hero-slide" style="background-image:url('images/IMG_1357.JPG'); background-position:center top;" data-label="地域祭り"></div>
-      <div class="hero-slide" style="background-image:url('images/fire_brigade.jpg'); background-position:center top;" data-label="消防団活動"></div>
-      <div class="hero-slide" style="background-image:url('images/IMG_0067.JPG')" data-label="会議・打ち合わせ"></div>
-      <div class="hero-slide" style="background-image:url('images/IMG_9415.JPG'); background-position:center top;" data-label="大凧まつり"></div>
-      <div class="hero-slide" style="background-image:url('images/IMG_9990.JPG'); background-position:center top;" data-label="自動運転バス視察"></div>
+      <div class="hero-slide" data-bg="images/IMG_1358.PNG" data-label="議会登壇"></div>
+      <div class="hero-slide" data-bg="images/report_crowd.jpg" data-label="市政報告会"></div>
+      <div class="hero-slide" data-bg="images/report_speech.jpg" data-label="市政報告会・講演"></div>
+      <div class="hero-slide" data-bg="images/school_visit.jpg" data-label="学校訪問・対話"></div>
+      <div class="hero-slide" data-bg="images/kite_main.jpg" data-label="地域文化の継承"></div>
+      <div class="hero-slide" data-bg="images/factory_visit.jpg" data-label="産業・企業視察"></div>
+      <div class="hero-slide" data-bg="images/fire_watch.jpg" data-label="防災・安全活動"></div>
+      <div class="hero-slide" data-bg="images/IMG_1357.JPG" style="background-position:center top;" data-label="地域祭り"></div>
+      <div class="hero-slide" data-bg="images/fire_brigade.jpg" style="background-position:center top;" data-label="消防団活動"></div>
+      <div class="hero-slide" data-bg="images/IMG_0067.JPG" data-label="会議・打ち合わせ"></div>
+      <div class="hero-slide" data-bg="images/IMG_9415.JPG" style="background-position:center top;" data-label="大凧まつり"></div>
+      <div class="hero-slide" data-bg="images/IMG_9990.JPG" style="background-position:center top;" data-label="自動運転バス視察"></div>
     </div>
     <div class="hero-overlay"></div>
 
@@ -103,7 +139,7 @@
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-label">相模原市議会議員（南区選出）</div>
-        <div class="hero-name">務川 慧</div>
+        <h1 class="hero-name">務川 慧</h1>
         <div class="hero-name-ruby">むかわ けい</div>
         <p class="hero-catch">
           すべてはこの故郷のために！<br>
@@ -284,26 +320,13 @@
       <div class="section-subtitle">最新情報・活動レポート</div>
 
       <div class="news-list">
+        {% for post in site.posts limit:4 %}
         <div class="news-item">
-          <span class="news-date">2026.03.14</span>
-          <span class="news-tag">ブログ</span>
-          <a href="blog.html">令和8年度当初予算案のポイント ― 過去最大4,055億円の予算編成について</a>
+          <span class="news-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+          <span class="news-tag">{{ post.category | default: "ブログ" }}</span>
+          <a href="{{ post.url }}">{{ post.title }}</a>
         </div>
-        <div class="news-item">
-          <span class="news-date">2026.03.09</span>
-          <span class="news-tag">ブログ</span>
-          <a href="blog.html">令和8年3月 こども文教委員会・予算委員会 質疑報告</a>
-        </div>
-        <div class="news-item">
-          <span class="news-date">2026.02.01</span>
-          <span class="news-tag">お知らせ</span>
-          <a href="blog.html">ホームページをリニューアルしました</a>
-        </div>
-        <div class="news-item">
-          <span class="news-date">2025.12.01</span>
-          <span class="news-tag">市政報告</span>
-          <a href="blog.html">市政報告 vol.17 発行 ― 自動運転バス実証運行について</a>
-        </div>
+        {% endfor %}
       </div>
 
       <div class="text-center mt-32">
@@ -367,6 +390,7 @@
           <li><a href="newsletter.html">市政報告レポート</a></li>
           <li><a href="contact.html">お問い合わせ</a></li>
           <li><a href="support.html">ご支援のお願い</a></li>
+          <li><a href="volunteer.html">ボランティア募集</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -387,16 +411,5 @@
 </footer>
 
 <script src="js/main.js"></script>
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", function(user) {
-      if (!user) {
-        window.netlifyIdentity.on("login", function() {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
 </body>
 </html>

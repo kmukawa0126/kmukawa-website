@@ -206,9 +206,15 @@
 
 <main>
   <article class="blog-article">
+    {%- if page.collection == "archive" %}
+    <a href="/archive/" class="blog-back-link">← 過去のブログ一覧へ戻る</a>
+    <header class="blog-article-header">
+      <span class="blog-article-tag">過去のブログ</span>
+    {%- else %}
     <a href="/blog.html" class="blog-back-link">← ブログ一覧へ戻る</a>
     <header class="blog-article-header">
       <span class="blog-article-tag">ブログ</span>
+    {%- endif %}
       <h1 class="blog-article-title">{{ page.title }}</h1>
       <div class="blog-article-meta">
         <span>{{ page.date | date: "%Y年%m月%d日" }}</span>

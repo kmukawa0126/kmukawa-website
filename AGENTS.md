@@ -102,7 +102,7 @@ kmukawa-website/
 ## 進行中・未完了の重要タスク
 
 1. **`kmukawa.jp` ドメイン取得**（お名前.com、未取得）
-2. **Wix 旧ブログ 444 本は `_archive/` へ移設済み（261101）**: collection `archive`（`/archive/<YYYYMMDD>-<hash6>/`・一覧 `archive.html`）。生成元=`../wix_migration/convert_archive.py`（手で `_archive/` を直すと再生成で消える）。kmukawa.com→kmukawa.jp の 1:1 301 転送=`../wix_migration/redirect-worker/`（Cloudflare Worker）。Wix 有料解約は検索順位の引継ぎ確認後。memory `project_sns_wix_exit_261101`
+2. **Wix 旧ブログ 444 本は `_archive/` へ移設済み（261101）**: collection `archive`（`/archive/<YYYYMMDD>-<hash6>/`・一覧 `archive.html`）。生成元=`../wix_migration/convert_archive.py`（手で `_archive/` を直すと再生成で消える）。kmukawa.com→kmukawa.jp の 1:1 301 転送=`../wix_migration/redirect-worker/`（Cloudflare Worker）。261102 Search Console アドレス変更受理・261103 Wix 有料解約＋旧サイト非公開済み（ドメイン契約は Wix に残す・2030-01-24 自動更新。Cloudflare の kmukawa.com ゾーンと Worker は恒久維持）。memory `project_sns_wix_exit_261101`
 3. **Google Analytics**: `G-GF42L60JH2` を `_layouts/post.html` に設置済み。他ページの導入状況は未確認
 4. **OGP 設定**: SNSシェア時のサムネイル設定未対応
 5. **Favicon**: 未設定

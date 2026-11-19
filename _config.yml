@@ -19,6 +19,16 @@ exclude:
   - docs/
   - netlify/
   - netlify.toml
+  # 内部ファイル・非公開資料（261119 追加：Search Console 対応時に公開されていたのを発見）
+  - AGENTS.md
+  - CLAUDE.md.bak_260920
+  - "*.bak*"
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - vendor/
+  - .bundle/
+  - _headers
 
 defaults:
   - scope:
